@@ -1,2 +1,9 @@
-# Titanic-ML-Kaggle
-ML binary classification predicting Titanic survival (Kaggle Competition). Best RF 78.95% and Best DNN AdamW 74.6%
+# Titanic: Machine Learning from Disaster
+
+## Deep Neural Network (DNN) solution
+
+__Hyperparameter-tuned DNN with AdamW optimiser (with weight decay regularisation) and holdout cross-validation.__
+
+
+
+## Random Forest Classifer (RF) solution
