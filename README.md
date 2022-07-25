@@ -7,7 +7,8 @@ The first step of the model is data visualisation and analysis with *pandas*. To
 
 ## Deep Neural Network (DNN) solution
 
-__Hyperparameter-tuned DNN with AdamW optimiser (with weight decay regularisation) and holdout validation.__
+__Hyperparameter-tuned DNN with AdamW optimiser (with weight decay regularisation), early stoppage and holdout validation.__
+
 α = 0.00014341, λ = 0.009, layer_dims = [6, 15, 10, 5, 1].
 
 
