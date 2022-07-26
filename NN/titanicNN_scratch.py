@@ -261,7 +261,7 @@ def model(X, Y, layer_dims, learning_rate=0.005, beta1=0.9, beta2=0.999, epsilon
     AdamW optimiser with β1, β2, ε, λ hyperparameters (λ is weight decay regularisation).
     Learning rate α used for gradient descent.
     Training over epochs_num epochs.
-    Print cost per 2000 epochs if print_cost is True.
+    Print cost per 200 epochs if print_cost is True.
 
     """
 
@@ -275,10 +275,10 @@ def model(X, Y, layer_dims, learning_rate=0.005, beta1=0.9, beta2=0.999, epsilon
 
     for t in range(epochs_num + 1):
 
-        if t % 1000 == 0:
-            # new train-dev 80-20 split every 10000 epochs
+        if t % 200 == 0:
+            # new train-dev 80-20 split every 1000 epochs
             train_X, dev_X, train_Y, dev_Y = train_dev_split(X, Y, seed)
-            #seed += 1 # increment to get new split next time
+            seed += 1 # increment to get new split next time
 
             train_X = normalise_input(train_X)
             dev_X = normalise_input(dev_X)
@@ -298,7 +298,7 @@ def model(X, Y, layer_dims, learning_rate=0.005, beta1=0.9, beta2=0.999, epsilon
         dev_AL[dev_AL == 1] = 0.99 # to avoid overflow
         dev_cost = compute_cost(dev_AL, dev_Y) # compute cost
         
-        if print_cost and t % 1000 == 0:
+        if print_cost and t % 200 == 0:
             print(f"Training Cost after epoch {t}: {train_cost}")
             train_costs.append(train_cost)
             dev_costs.append(dev_cost)
@@ -308,7 +308,7 @@ def model(X, Y, layer_dims, learning_rate=0.005, beta1=0.9, beta2=0.999, epsilon
         plt.plot(train_costs)
         plt.plot(dev_costs)
         plt.ylabel('Cost J')
-        plt.xlabel('Epochs (per 1000)')
+        plt.xlabel('Epochs (per 200)')
         plt.title(f"Learning rate = {learning_rate}")
         plt.legend(['Train', 'Dev'])
         plt.show()
@@ -407,11 +407,11 @@ layer_dims = [train_X.shape[0], 15, 10, 5, 1] #[train_X.shape[0], 15, 10, 5, 1]
 # hyperparameter_search(X, Y, layer_dims) # -> lambd = 0.02647225, learning_rate = 0.0093066 - 22/07/2022
 
 #parameters = model(X, Y, layer_dims, learning_rate=0.0093066, lambd=0.02647225, epochs_num=30000, print_cost=True) # - BEST SO FAR - 23/07/2022
-parameters = model(train_X, train_Y, layer_dims, learning_rate=0.00014341, lambd=0.009, epochs_num=5000, print_cost=True)
+parameters = model(train_X, train_Y, layer_dims, learning_rate=0.00014341, lambd=0.009, epochs_num=10000, print_cost=True)
 #parameters = model(X, Y, layer_dims, learning_rate=1e-4, epochs_num=300000, print_cost=True)
 
 predictions_train, train_accuracy = predict(train_X, train_Y, parameters)
-predictions_dev, val_accuracy = predict(val_X, val_Y, parameters)
+predictions_val, val_accuracy = predict(val_X, val_Y, parameters)
 
 print(train_accuracy)
 print(val_accuracy)
