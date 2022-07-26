@@ -30,7 +30,7 @@ Training Cost after epoch 10000: 0.3052417766157508
 ```
 
 The cost plot for the NN __without cross-validation__ is as follows:
-![cost_plot](https://user-images.githubusercontent.com/73920832/180898148-3ae46180-9c51-44c2-b620-07e397efd693.png)
+![cost_plot](https://user-images.githubusercontent.com/73920832/180900578-5c1ac423-677f-4147-a04b-eef779ef6eb6.png)
 
 Both plots follow the expected trend for test and dev set cost.
 
