@@ -1,40 +1,5 @@
 ### Neural Network solution built from scratch with Python
 
-```
-Training Cost after epoch 0: 0.7561181767062014
-Training Cost after epoch 200: 0.6619899788775067
-Training Cost after epoch 400: 0.597306843338508
-Training Cost after epoch 600: 0.5448120799541024
-Training Cost after epoch 800: 0.49539015531313596
-Training Cost after epoch 1000: 0.45467719299893866
-Training Cost after epoch 1200: 0.4218615101660319
-Training Cost after epoch 1400: 0.3990955829151976
-Training Cost after epoch 1600: 0.3844064425720208
-Training Cost after epoch 1800: 0.37388944021130116
-Training Cost after epoch 2000: 0.36598220642689316
-Training Cost after epoch 2200: 0.35975287168693454
-Training Cost after epoch 2400: 0.3545237269079123
-Training Cost after epoch 2600: 0.3497172312371567
-Training Cost after epoch 2800: 0.34580576445042244
-Training Cost after epoch 3000: 0.34205462799791214
-Training Cost after epoch 3200: 0.33823522328139816
-Training Cost after epoch 3400: 0.3343666559658569
-Training Cost after epoch 3600: 0.33019693439871356
-Training Cost after epoch 3800: 0.3258756571449182
-Training Cost after epoch 4000: 0.32181820071109907
-Training Cost after epoch 4200: 0.317695676896284
-Training Cost after epoch 4400: 0.31331492748820644
-Training Cost after epoch 4600: 0.30924867188248595
-Training Cost after epoch 4800: 0.3054036344997495
-Training Cost after epoch 5000: 0.3017512081227985
-```
-
-The training- and dev-set accuracy for the NN is as follows:
-```
-Training Accuracy - 0.8701622971285893
-Dev Accuracy - 0.8333333333333334
-```
-
 ### Regularisation
 The NN is trained with __early stoppage__ at 5000 epochs because after this point, the dev cost rises and Dev Accuracy decreases. Furthermore, this NN is trained with the Adam Optimiser with __Weight Decay__ (AdamW). Weight decay governed by the hyperparameter λ is used over the standard L2 Regularisation, because L2 regularisation does not perform as well as Weight Decay in Adam. The difference between the two regularisation methods is that AdamW updates the learned weights and biases directly while L2 updates the gradients and slightly alters the gradient update formula.
 
@@ -44,3 +9,56 @@ It was determined by random logarithmic search that a good hyperparameter pair i
 learning_rate=0.00014341, lambd=0.009
 ```
 The other hyperparameters β1 (momentum), β2 (RMSprop) and ε (RMSprop) are set to their default values and not tuned.
+
+### Cost plot and Cost decrease
+The cost plot for the NN __with cross-validation__ is as follows:
+![cost_plot_crossval](https://user-images.githubusercontent.com/73920832/180899736-904685c3-32a3-42ec-92b3-8027f983eb3b.png)
+
+The terminal cost per 1000 epochs with cross-val is shown:
+```
+Training Cost after epoch 0: 0.7561181767062014
+Training Cost after epoch 1000: 0.4805551645663465
+Training Cost after epoch 2000: 0.3842755082774036
+Training Cost after epoch 3000: 0.37247016028689456
+Training Cost after epoch 4000: 0.3655897293227129
+Training Cost after epoch 5000: 0.36246756938466146
+Training Cost after epoch 6000: 0.3335860920713467
+Training Cost after epoch 7000: 0.3412132670026569
+Training Cost after epoch 8000: 0.3214487727688435
+Training Cost after epoch 9000: 0.31409249190682287
+Training Cost after epoch 10000: 0.3052417766157508
+```
+
+The cost plot for the NN __without cross-validation__ is as follows:
+![cost_plot](https://user-images.githubusercontent.com/73920832/180898148-3ae46180-9c51-44c2-b620-07e397efd693.png)
+
+Both plots follow the expected trend for test and dev set cost.
+
+Further, the terminal cost per 1000 epochs without cross-val is recorded below:
+```
+Training Cost after epoch 0: 0.7561181767062014
+Training Cost after epoch 1000: 0.45467719299893866
+Training Cost after epoch 2000: 0.36598220642689316
+Training Cost after epoch 3000: 0.34205462799791214
+Training Cost after epoch 4000: 0.32181820071109907
+Training Cost after epoch 5000: 0.3017512081227985
+```
+
+### Accuracy
+
+The NN was trained with and without holdout cross-validation. With cross-validation, the training data was shuffled and partitioned into training and validation sets (90-10 split). Then, every 200 epochs (found to be optimal), the training set was partitioned randomly (with incrementing seed to yield a new and reproducible split) into training and dev sets (80-20). The model was trained on the training set and evaluated on both the training and dev sets to yield the training-dev cost plots. Further, the final model was evaluated on the validation set which was held out from the training and thus induced no training bias. The validation accuracy was optimimsed by the hyperparameter tuning.
+
+Without cross-validation, 80% of the training set was used in training and 20% using as the validation set (random partition at known seed). There was no reshuffling of the training set per set number of epochs.
+
+The training- and val-set accuracy for the NN with holdout cross-validation is as follows:
+```
+Training Accuracy - 0.8764044943820225
+Validation Accuracy - 0.8444444444444444
+```
+Without cross-validation:
+```
+Training Accuracy - 0.8701622971285893
+Validation Accuracy - 0.8333333333333334
+```
+
+While the cross-validation model performs slightly better, this is not a significant performance increase. Both models perform the same on the test set (77.03%).
