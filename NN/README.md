@@ -1,7 +1,7 @@
 ### Neural Network solution built from scratch with Python
 
 ### Regularisation
-The NN is trained with __early stoppage__ at 5000 epochs because after this point, the dev cost rises and Dev Accuracy decreases. Furthermore, this NN is trained with the Adam Optimiser with __Weight Decay__ (AdamW). Weight decay governed by the hyperparameter λ is used over the standard L2 Regularisation, because L2 regularisation does not perform as well as Weight Decay in Adam. The difference between the two regularisation methods is that AdamW updates the learned weights and biases directly while L2 updates the gradients and slightly alters the gradient update formula.
+The NN is trained with __early stoppage__ at 10000 epochs with cross-validation and 5000 epochs without cross-val because after this point, the validation cost rises and Val Accuracy decreases. Furthermore, this NN is trained with the Adam Optimiser with __Weight Decay__ (AdamW). Weight decay governed by the hyperparameter λ is used over the standard L2 Regularisation, because L2 regularisation does not perform as well as Weight Decay in Adam. The difference between the two regularisation methods is that AdamW updates the learned weights and biases directly while L2 updates the gradients and slightly alters the gradient update formula.
 
 ### Hyperparameter Random Search
 It was determined by random logarithmic search that a good hyperparameter pair is
@@ -12,7 +12,7 @@ The other hyperparameters β1 (momentum), β2 (RMSprop) and ε (RMSprop) are set
 
 ### Cost plot and Cost decrease
 The cost plot for the NN __with cross-validation__ is as follows:
-![cost_plot_crossval](https://user-images.githubusercontent.com/73920832/180899736-904685c3-32a3-42ec-92b3-8027f983eb3b.png)
+![cost_plot_crossval](https://user-images.githubusercontent.com/73920832/180900942-fae74bc9-1b4e-47c1-b538-4190a62a41fa.png)
 
 The terminal cost per 1000 epochs with cross-val is shown:
 ```
@@ -30,7 +30,7 @@ Training Cost after epoch 10000: 0.3052417766157508
 ```
 
 The cost plot for the NN __without cross-validation__ is as follows:
-![cost_plot_withoutcrossval](https://user-images.githubusercontent.com/73920832/180900742-07567f60-6aba-4388-ba77-9111fcddf06e.png)
+![cost_plot_withoutcrossval](https://user-images.githubusercontent.com/73920832/180900954-e9d5c414-7646-46bf-81e6-14c22b956d92.png)
 
 Both plots follow the expected trend for test and dev set cost.
 
