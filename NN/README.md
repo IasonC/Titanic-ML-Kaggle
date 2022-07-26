@@ -1,4 +1,7 @@
-### Neural Network solution built from scratch with Python
+### 4-Layer Neural Network solution built from scratch with Python
+
+### Layers
+The NN is shaped as [6, 15, 10, 5, 1]. Hidden layers have ReLU activations and the output layer has a Sigmoid activation since this model is a binary classifier of passenger survival. There was a variation in model performance with more or less layers and neurons, but I empirically found that 4 layers works well for this dataset, and increasing to 5 layers decreases performance on the test and val sets. There is future work in more thoroughly testing various layer-neuron architectures to find the best-sized NN.
 
 ### Regularisation
 The NN is trained with __early stoppage__ at 10000 epochs with cross-validation and 5000 epochs without cross-val because after this point, the validation cost rises and Val Accuracy decreases. Furthermore, this NN is trained with the Adam Optimiser with __Weight Decay__ (AdamW). Weight decay governed by the hyperparameter λ is used over the standard L2 Regularisation, because L2 regularisation does not perform as well as Weight Decay in Adam. The difference between the two regularisation methods is that AdamW updates the learned weights and biases directly while L2 updates the gradients and slightly alters the gradient update formula.
