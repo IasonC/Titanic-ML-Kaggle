@@ -10,6 +10,9 @@ learning_rate=0.00014341, lambd=0.009
 ```
 The other hyperparameters β1 (momentum), β2 (RMSprop) and ε (RMSprop) are set to their default values and not tuned.
 
+### Normalisation
+Input training data to the model was normalised by Z-standardisation with mean and standard deviation (Z = (x-μ)/σ), in order to remove data variation and equalise difference in scale between the features. Further, the test data was normalised before making predictions for the submission.csv
+
 ### Cost plot and Cost decrease
 The cost plot for the NN __with cross-validation__ is as follows:
 ![cost_plot_crossval](https://user-images.githubusercontent.com/73920832/180900942-fae74bc9-1b4e-47c1-b538-4190a62a41fa.png)
